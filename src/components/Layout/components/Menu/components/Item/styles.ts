@@ -8,7 +8,7 @@ export const ItemContainer = styled.div`
         margin: 0 0.75rem;
         cursor: pointer;
         color: ${theme.colors.white};
-        padding: 1rem;
+        padding: 0.5rem 1rem;
 
         &:hover {
             color: ${theme.colors.primary};
@@ -41,7 +41,6 @@ export const DropDownItems = styled.div<DropDownItemsProps>`
     ${({ theme, show = false }) => css`
         display: flex;
         flex-direction: column;
-        gap: 1rem;
         position: absolute;
         z-index: ${theme.layers.menu};
 
