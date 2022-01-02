@@ -2,9 +2,14 @@ import React from 'react'
 import type { NextPage } from 'next'
 
 import * as S from './index.styles'
+import { Layout } from 'components'
 
 const Home: NextPage = () => {
-    return <S.Title>MyMovies</S.Title>
+    return (
+        <Layout>
+            <S.Title>MyMovies</S.Title>
+        </Layout>
+    )
 }
 
 export default Home

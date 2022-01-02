@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "commit": "cz",
+    "cz": "cz",
     "lint": "eslint src",
     "test": "jest",
     "test:watch": "yarn test --watch",
