@@ -5,6 +5,9 @@ import Header from './index'
 export default {
     title: 'Components/Structural/Header',
     component: Header,
+    parameters: {
+        layout: 'fullscreen',
+    },
 } as Meta
 
 export const Default: Story = (args) => <Header {...args} />

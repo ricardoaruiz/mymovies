@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
+import media from 'styled-media-query'
 
 export const ItemContainer = styled.div`
     ${({ theme }) => css`
@@ -21,43 +22,88 @@ export const ItemContainer = styled.div`
 export const Item = styled.a`
     color: inherit;
     text-decoration: none;
+    font-size: 1.8rem;
+
+    ${media.greaterThan('medium')`
+        font-size: 2rem;
+    `}
 `
 
 // DropdownItems
+export const DropDownItemsContainer = styled.div<{ isMobile: boolean }>`
+    ${({ isMobile }) => css`
+        ${isMobile &&
+        css`
+            display: flex;
+            flex-direction: column;
+        `}
+    `};
+`
+
 type DropDownItemsProps = {
     show: boolean
+    isMobile: boolean
 }
 
 const dropDownItemsModifiers = {
-    visible: () => css`
-        visibility: visible;
-        opacity: 1;
+    visible: (isMobile = false) => css`
+        ${isMobile &&
+        css`
+            height: max-content;
+            visibility: visible;
+            opacity: 1;
+        `}
+        ${!isMobile &&
+        css`
+            visibility: visible;
+            opacity: 1;
+        `}
     `,
-    invisible: () => css`
-        visibility: hidden;
-        opacity: 0;
+    invisible: (isMobile = false) => css`
+        ${isMobile &&
+        css`
+            height: 0;
+            visibility: hidden;
+            opacity: 0;
+        `}
+        ${!isMobile &&
+        css`
+            visibility: hidden;
+            opacity: 0;
+        `}
+    `,
+    mobile: () => css`
+        position: relative;
+        width: auto;
+        transition: opacity 0.6s;
+        padding: 0.5rem;
+    `,
+    desktop: (theme: DefaultTheme) => css`
+        position: absolute;
+        top: 55px;
+        left: 5px;
+        border: 1px solid ${theme.colors.white};
+        border-radius: 5px;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
+        width: max-content;
+        transition: opacity 0.4s;
+        padding: 1rem;
     `,
 }
 
 export const DropDownItems = styled.div<DropDownItemsProps>`
-    ${({ theme, show = false }) => css`
+    ${({ theme, show = false, isMobile = true }) => css`
         display: flex;
         flex-direction: column;
-        position: absolute;
+        background-color: #032541;
         z-index: ${theme.layers.menu};
 
-        background-color: #032541;
-        border: 1px solid ${theme.colors.white};
-        border-radius: 5px;
-        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
-
-        top: 55px;
-        left: 5px;
-        padding: 10px;
-        min-width: max-content;
+        ${isMobile
+            ? dropDownItemsModifiers.mobile()
+            : dropDownItemsModifiers.desktop(theme)};
 
         ${show
-            ? dropDownItemsModifiers.visible()
-            : dropDownItemsModifiers.invisible()}
+            ? dropDownItemsModifiers.visible(isMobile)
+            : dropDownItemsModifiers.invisible(isMobile)}
     `};
 `

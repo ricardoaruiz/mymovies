@@ -1,3 +1,4 @@
 import Layout from './Layout'
+import { MenuIcon, CloseIcon } from './Icons'
 
-export { Layout }
+export { Layout, MenuIcon, CloseIcon }

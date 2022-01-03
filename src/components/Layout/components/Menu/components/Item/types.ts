@@ -7,6 +7,7 @@ export type Item = Pick<ItemEvents, 'onClick'> & {
 export type ItemProps = Item &
     Omit<ItemEvents, 'onClick'> & {
         isOpen?: boolean
+        type?: 'mobile' | 'desk'
     }
 
 type ItemEvents = {

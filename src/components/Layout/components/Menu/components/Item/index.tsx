@@ -10,6 +10,7 @@ const Item: React.FC<ItemProps> = ({
     label,
     href,
     isOpen = false,
+    type = 'mobile',
     onMouseOver,
     onMouseLeave,
     onClick,
@@ -17,6 +18,11 @@ const Item: React.FC<ItemProps> = ({
 }) => {
     const myRef = React.useRef<HTMLDivElement>(null)
     const router = useRouter()
+
+    /**
+     *
+     */
+    const isMobile = React.useMemo(() => type === 'mobile', [type])
 
     /**
      *
@@ -42,16 +48,20 @@ const Item: React.FC<ItemProps> = ({
     /**
      *
      */
-    const renderDropDownItem = React.useMemo(() => {
+    const renderDropDownItems = React.useMemo(() => {
         return (
-            <>
+            <S.DropDownItemsContainer isMobile={isMobile}>
                 {renderItem}
-                <S.DropDownItems show={isOpen} tabIndex={-1}>
+                <S.DropDownItems
+                    show={isOpen}
+                    isMobile={isMobile}
+                    tabIndex={-1}
+                >
                     {children}
                 </S.DropDownItems>
-            </>
+            </S.DropDownItemsContainer>
         )
-    }, [children, isOpen, renderItem])
+    }, [children, isMobile, isOpen, renderItem])
 
     /**
      *
@@ -59,6 +69,7 @@ const Item: React.FC<ItemProps> = ({
     const handleClickEvent = React.useCallback(() => {
         children && isOpen && onMouseLeave && onMouseLeave()
         children && !isOpen && onMouseOver && onMouseOver()
+
         onClick && onClick()
         href && router.push(href)
     }, [children, href, isOpen, onClick, onMouseLeave, onMouseOver, router])
@@ -68,6 +79,7 @@ const Item: React.FC<ItemProps> = ({
      */
     const handleKeyDownEvent = React.useCallback(
         (event: React.KeyboardEvent<HTMLDivElement>) => {
+            console.log('handleKeyDownEvent')
             if (event.key === 'Enter' || event.key === ' ') {
                 onMouseOver && onMouseOver()
                 handleClickEvent()
@@ -80,6 +92,9 @@ const Item: React.FC<ItemProps> = ({
         [handleClickEvent, onMouseLeave, onMouseOver]
     )
 
+    /**
+     *
+     */
     const ariaLabel = React.useMemo(() => {
         if (children) {
             return `${label}, ${isOpen ? 'ver menos' : 'ver mais'}`
@@ -93,13 +108,13 @@ const Item: React.FC<ItemProps> = ({
             ref={myRef}
             tabIndex={1}
             onClick={handleClickEvent}
-            onMouseOver={onMouseOver}
-            onMouseLeave={onMouseLeave}
+            onMouseOver={() => !isMobile && onMouseOver && onMouseOver()}
+            onMouseLeave={() => !isMobile && onMouseLeave && onMouseLeave()}
             onKeyDown={handleKeyDownEvent}
             aria-label={ariaLabel}
             role="menuitem"
         >
-            {!children ? renderNavigationItem : renderDropDownItem}
+            {!children ? renderNavigationItem : renderDropDownItems}
         </S.ItemContainer>
     )
 }

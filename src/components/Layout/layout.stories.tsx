@@ -5,6 +5,9 @@ import Layout from '.'
 export default {
     title: 'Components/Structural/Layout',
     component: Layout,
+    parameters: {
+        layout: 'fullscreen',
+    },
 } as Meta
 
 export const Default: Story = () => (

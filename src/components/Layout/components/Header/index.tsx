@@ -65,6 +65,10 @@ const Header = () => {
 
     return (
         <S.Header>
+            <S.Logo>
+                My<small>Movies</small>
+            </S.Logo>
+
             <Menu items={menuItems} />
         </S.Header>
     )
