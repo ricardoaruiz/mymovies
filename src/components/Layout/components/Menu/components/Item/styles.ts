@@ -3,7 +3,9 @@ import styled, { css } from 'styled-components'
 export const ItemContainer = styled.div`
     ${({ theme }) => css`
         position: relative;
-        display: block;
+        display: flex;
+        align-items: center;
+        align-self: stretch;
         font-size: ${theme.font.sizes.xlarge};
         margin: 0 0.75rem;
         cursor: pointer;
@@ -49,8 +51,8 @@ export const DropDownItems = styled.div<DropDownItemsProps>`
         border-radius: 5px;
         box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
 
-        top: 40px;
-        left: -2px;
+        top: 55px;
+        left: 5px;
         padding: 10px;
         min-width: max-content;
 
