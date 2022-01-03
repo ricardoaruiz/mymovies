@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 import Menu from '../Menu'
@@ -65,9 +66,11 @@ const Header = () => {
 
     return (
         <S.Header>
-            <S.Logo>
-                My<small>Movies</small>
-            </S.Logo>
+            <Link href="/" passHref>
+                <S.Logo>
+                    My<small>Movies</small>
+                </S.Logo>
+            </Link>
 
             <Menu items={menuItems} />
         </S.Header>

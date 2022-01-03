@@ -7,7 +7,7 @@ import { Layout } from 'components'
 const Home: NextPage = () => {
     return (
         <Layout>
-            <S.Title>MyMovies</S.Title>
+            <S.Title>Home</S.Title>
         </Layout>
     )
 }

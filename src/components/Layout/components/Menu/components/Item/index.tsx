@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { ItemProps } from './types'
@@ -27,23 +26,23 @@ const Item: React.FC<ItemProps> = ({
     /**
      *
      */
-    const renderItem = React.useMemo(
-        () => <S.Item tabIndex={-1}>{label}</S.Item>,
-        [label]
-    )
+    const handleClickEvent = React.useCallback(() => {
+        children && isOpen && onMouseLeave && onMouseLeave()
+        children && !isOpen && onMouseOver && onMouseOver()
+        onClick && onClick()
+
+        setTimeout(() => {
+            href && router.push(href)
+        }, 250)
+    }, [children, href, isOpen, onClick, onMouseLeave, onMouseOver, router])
 
     /**
      *
      */
-    const renderNavigationItem = React.useMemo(() => {
-        return !href ? (
-            renderItem
-        ) : (
-            <Link href={href} passHref>
-                {renderItem}
-            </Link>
-        )
-    }, [href, renderItem])
+    const renderItem = React.useMemo(
+        () => <S.Item tabIndex={-1}>{label}</S.Item>,
+        [label]
+    )
 
     /**
      *
@@ -66,20 +65,8 @@ const Item: React.FC<ItemProps> = ({
     /**
      *
      */
-    const handleClickEvent = React.useCallback(() => {
-        children && isOpen && onMouseLeave && onMouseLeave()
-        children && !isOpen && onMouseOver && onMouseOver()
-
-        onClick && onClick()
-        href && router.push(href)
-    }, [children, href, isOpen, onClick, onMouseLeave, onMouseOver, router])
-
-    /**
-     *
-     */
     const handleKeyDownEvent = React.useCallback(
         (event: React.KeyboardEvent<HTMLDivElement>) => {
-            console.log('handleKeyDownEvent')
             if (event.key === 'Enter' || event.key === ' ') {
                 onMouseOver && onMouseOver()
                 handleClickEvent()
@@ -102,6 +89,9 @@ const Item: React.FC<ItemProps> = ({
         return label
     }, [children, isOpen, label])
 
+    /**
+     *
+     */
     return (
         <S.ItemContainer
             id={id}
@@ -114,7 +104,7 @@ const Item: React.FC<ItemProps> = ({
             aria-label={ariaLabel}
             role="menuitem"
         >
-            {!children ? renderNavigationItem : renderDropDownItems}
+            {!children ? renderItem : renderDropDownItems}
         </S.ItemContainer>
     )
 }

@@ -8,7 +8,7 @@ describe('<Home />', () => {
         renderWithTheme(<Home />)
 
         expect(
-            screen.getByRole('heading', { name: /MyMovies/i })
+            screen.getByRole('heading', { name: /Home/i })
         ).toBeInTheDocument()
     })
 })

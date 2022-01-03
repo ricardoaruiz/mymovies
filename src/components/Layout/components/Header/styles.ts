@@ -15,6 +15,7 @@ export const Logo = styled.div`
         margin-right: 1rem;
         color: ${theme.colors.primary};
         font-size: 3rem;
+        cursor: pointer;
 
         & small {
             font-size: 1.5rem;

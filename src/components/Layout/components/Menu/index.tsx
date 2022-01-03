@@ -24,6 +24,11 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
                     label={item.main.label}
                     isOpen={openedMenu === item.main.id}
                     type={type}
+                    onClick={() => {
+                        item.main.onClick && item.main.onClick()
+                        !item.subItems?.length && setOpenedSliderMenu(false)
+                    }}
+                    href={item.main.href}
                     onMouseOver={() => setOpenedMenu(item.main.id)}
                     onMouseLeave={() => setOpenedMenu(null)}
                 >
@@ -33,7 +38,10 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
                             label={item.label}
                             href={item.href}
                             type={type}
-                            onClick={item.onClick}
+                            onClick={() => {
+                                item.onClick && item.onClick()
+                                setOpenedSliderMenu(false)
+                            }}
                         />
                     ))}
                 </Item>
