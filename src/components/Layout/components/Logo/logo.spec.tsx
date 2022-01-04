@@ -32,7 +32,7 @@ describe('<Logo />', () => {
         })
     })
 
-    it('should be route when href was informed on text logo', () => {
+    it('should be route when href was informed and click on text logo', () => {
         renderWithTheme(<Logo href="/home" />)
 
         const logo = screen.getByRole('img', { name: 'logo' })
@@ -40,6 +40,34 @@ describe('<Logo />', () => {
             cursor: 'pointer',
         })
         fireEvent.click(logo)
+        expect(mockedPush).toHaveBeenCalledWith('/home')
+    })
+
+    it('should be route when href was informed and press Enter key on text logo', () => {
+        renderWithTheme(<Logo href="/home" />)
+
+        const logo = screen.getByRole('img', { name: 'logo' })
+        expect(logo).toHaveStyle({
+            cursor: 'pointer',
+        })
+        fireEvent.focusIn(logo)
+        fireEvent.keyDown(logo, {
+            key: 'Enter',
+        })
+        expect(mockedPush).toHaveBeenCalledWith('/home')
+    })
+
+    it('should be route when href was informed and press Space key on text logo', () => {
+        renderWithTheme(<Logo href="/home" />)
+
+        const logo = screen.getByRole('img', { name: 'logo' })
+        expect(logo).toHaveStyle({
+            cursor: 'pointer',
+        })
+        fireEvent.focusIn(logo)
+        fireEvent.keyDown(logo, {
+            key: ' ',
+        })
         expect(mockedPush).toHaveBeenCalledWith('/home')
     })
 
@@ -123,7 +151,7 @@ describe('<Logo />', () => {
         expect(logoImage).toBeInTheDocument()
     })
 
-    it('should be route when href was informed on image logo', () => {
+    it('should be route when href was informed and click on image logo', () => {
         const imgURL = '/images/avatar.jpeg'
         renderWithTheme(<Logo imgURL={imgURL} href="/movies" />)
 
@@ -136,6 +164,44 @@ describe('<Logo />', () => {
         expect(logoImage).toBeInTheDocument()
 
         fireEvent.click(logoImage)
+        expect(mockedPush).toHaveBeenCalledWith('/movies')
+    })
+
+    it('should be route when href was informed and press Enter key on image logo', () => {
+        const imgURL = '/images/avatar.jpeg'
+        renderWithTheme(<Logo imgURL={imgURL} href="/movies" />)
+
+        const logo = screen.getByRole('img', { name: 'logo' })
+        expect(logo).toBeInTheDocument()
+        expect(logo).toHaveStyle({
+            cursor: 'pointer',
+        })
+        const logoImage = screen.getByRole('img', { name: 'logo image' })
+        expect(logoImage).toBeInTheDocument()
+
+        fireEvent.focusIn(logoImage)
+        fireEvent.keyDown(logoImage, {
+            key: 'Enter',
+        })
+        expect(mockedPush).toHaveBeenCalledWith('/movies')
+    })
+
+    it('should be route when href was informed and press Space key on image logo', () => {
+        const imgURL = '/images/avatar.jpeg'
+        renderWithTheme(<Logo imgURL={imgURL} href="/movies" />)
+
+        const logo = screen.getByRole('img', { name: 'logo' })
+        expect(logo).toBeInTheDocument()
+        expect(logo).toHaveStyle({
+            cursor: 'pointer',
+        })
+        const logoImage = screen.getByRole('img', { name: 'logo image' })
+        expect(logoImage).toBeInTheDocument()
+
+        fireEvent.focusIn(logoImage)
+        fireEvent.keyDown(logoImage, {
+            key: ' ',
+        })
         expect(mockedPush).toHaveBeenCalledWith('/movies')
     })
 

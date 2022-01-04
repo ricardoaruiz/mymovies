@@ -5,6 +5,9 @@ import Footer from './index'
 export default {
     title: 'Components/Structural/Footer',
     component: Footer,
+    parameters: {
+        layout: 'fullscreen',
+    },
 } as Meta
 
 export const Default: Story = (args) => <Footer {...args} />

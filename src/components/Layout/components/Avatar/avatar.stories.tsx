@@ -11,6 +11,7 @@ export default {
             control: { type: 'select' },
             options: ['small', 'medium', 'large'],
         },
+        onClick: { action: 'onClick' },
     },
     args: {
         size: 'medium',

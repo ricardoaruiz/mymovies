@@ -24,6 +24,18 @@ const Logo: React.VFC<LogoProps> = ({
     }, [href, router])
 
     /**
+     * Navigate to informed href when Enter or Space key is pressed
+     */
+    const onKeyDownNavigate = React.useCallback(
+        (event: React.KeyboardEvent<HTMLDivElement>) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                navigate()
+            }
+        },
+        [navigate]
+    )
+
+    /**
      * Render logo by default, informed texts or image
      */
     const logo = React.useMemo(() => {
@@ -54,7 +66,7 @@ const Logo: React.VFC<LogoProps> = ({
             aria-label="logo"
             tabIndex={1}
             onClick={navigate}
-            onKeyDown={navigate}
+            onKeyDown={onKeyDownNavigate}
         >
             {logo}
         </S.Logo>

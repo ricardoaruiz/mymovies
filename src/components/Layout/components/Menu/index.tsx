@@ -52,7 +52,7 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
     )
 
     return (
-        <S.Menu tabIndex={1} role="menu" aria-label="menu da aplicação">
+        <S.Menu tabIndex={-1} role="menu" aria-label="menu da aplicação">
             {/*  */}
             <S.MobileMenu>
                 {!openedSliderMenu && (
@@ -60,6 +60,7 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
                         width="4rem"
                         height="4rem"
                         onClick={() => setOpenedSliderMenu(true)}
+                        aria-hidden={openedSliderMenu}
                     />
                 )}
                 {openedSliderMenu && (
@@ -67,6 +68,7 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
                         width="4rem"
                         height="4rem"
                         onClick={() => setOpenedSliderMenu(false)}
+                        aria-hidden={!openedSliderMenu}
                     />
                 )}
 
