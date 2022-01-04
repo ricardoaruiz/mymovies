@@ -80,7 +80,7 @@ const dropDownItemsModifiers = {
     `,
     desktop: (theme: DefaultTheme) => css`
         position: absolute;
-        top: 55px;
+        top: 40px;
         left: 5px;
         border: 1px solid ${theme.colors.white};
         border-radius: 5px;
@@ -95,7 +95,7 @@ export const DropDownItems = styled.div<DropDownItemsProps>`
     ${({ theme, show = false, isMobile = true }) => css`
         display: flex;
         flex-direction: column;
-        background-color: #032541;
+        background-color: ${theme.colors.secondary};
         z-index: ${theme.layers.menu};
 
         ${isMobile

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
+import { Avatar } from '../Avatar'
 import Menu from '../Menu'
 import { ItemMenu } from '../Menu/types'
 
@@ -66,13 +67,22 @@ const Header = () => {
 
     return (
         <S.Header>
-            <Link href="/" passHref>
-                <S.Logo>
-                    My<small>Movies</small>
-                </S.Logo>
-            </Link>
+            <S.HeaderContent>
+                <Link href="/" passHref>
+                    <S.Logo>
+                        My<small>Movies</small>
+                    </S.Logo>
+                </Link>
 
-            <Menu items={menuItems} />
+                <Menu items={menuItems} />
+
+                <S.AvatarContainer>
+                    <Avatar
+                        imgURL="/images/avatar.jpeg"
+                        onClick={() => console.log('avatar clicked')}
+                    />
+                </S.AvatarContainer>
+            </S.HeaderContent>
         </S.Header>
     )
 }

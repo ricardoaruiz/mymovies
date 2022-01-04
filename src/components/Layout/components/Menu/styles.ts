@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
+import { darken } from 'polished'
 
 export const Menu = styled.nav`
     display: flex;
@@ -26,7 +27,7 @@ type SlideMenuProps = {
 
 const slideMenuModifiers = {
     open: () => css`
-        left: -80px;
+        left: 0px;
     `,
     close: () => css`
         left: -800px;
@@ -46,7 +47,8 @@ export const SliderMenu = styled.div<SlideMenuProps>`
         left: 0;
         width: 100%;
         height: calc(100vh - 7rem);
-        background-color: #032541;
+        border-top: 1px solid ${darken(0.2, theme.colors.secondary)};
+        background-color: ${theme.colors.secondary};
         z-index: ${theme.layers.modal};
         transition: all 0.3s;
         box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
@@ -76,4 +78,21 @@ export const DeskMenu = styled.div`
         align-self: stretch;
         align-items: center;
     `}
+`
+
+export const AvatarContainer = styled.div`
+    align-self: center;
+    margin: 1rem 0 0.5rem;
+`
+
+export const Divider = styled.div`
+    ${({ theme }) => css`
+        width: 100%;
+        height: 1px;
+        background-color: ${darken(0.2, theme.colors.secondary)};
+    `};
+`
+
+export const MenuItemsMobileContainer = styled.div`
+    margin-top: 2rem;
 `

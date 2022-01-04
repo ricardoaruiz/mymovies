@@ -1,15 +1,26 @@
 import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
 export const Header = styled.header`
     ${({ theme }) => css`
         display: flex;
         align-items: center;
         height: 7rem;
-        background-color: #032541;
+        background-color: ${theme.colors.secondary};
         color: ${theme.colors.white};
-        padding: 0 1rem;
     `};
 `
+export const HeaderContent = styled.div`
+    ${({ theme }) => css`
+        display: flex;
+        align-items: center;
+        flex: 1;
+        padding: 0 1.5rem;
+        max-width: ${theme.grid.container};
+        margin: 0 auto;
+    `};
+`
+
 export const Logo = styled.div`
     ${({ theme }) => css`
         margin-right: 1rem;
@@ -21,4 +32,13 @@ export const Logo = styled.div`
             font-size: 1.5rem;
         }
     `};
+`
+
+export const AvatarContainer = styled.div`
+    display: none;
+
+    ${media.greaterThan('medium')`
+        display: flex;
+        flex: 1;
+    `}
 `

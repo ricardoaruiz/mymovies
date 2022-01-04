@@ -10,8 +10,8 @@
     "test": "jest",
     "test:watch": "yarn test --watch",
     "prepare": "husky install",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -s ./public -p 6006",
+    "build-storybook": "build-storybook -s ./public"
   },
   "dependencies": {
     "next": "12.0.7",

@@ -4,6 +4,7 @@ import Item from './components/Item'
 import { MenuProps } from './types'
 
 import * as S from './styles'
+import { Avatar } from '../Avatar'
 import { CloseIcon, MenuIcon } from '../../../Icons'
 
 const Menu: React.VFC<MenuProps> = ({ items }) => {
@@ -70,9 +71,15 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
                 )}
 
                 <S.SliderMenu isOpen={openedSliderMenu}>
-                    <S.SliderMenuContent>
+                    <S.AvatarContainer>
+                        <Avatar imgURL="/images/avatar.jpeg" size="large" />
+                    </S.AvatarContainer>
+
+                    <S.Divider />
+
+                    <S.MenuItemsMobileContainer>
                         {menuItems('mobile')}
-                    </S.SliderMenuContent>
+                    </S.MenuItemsMobileContainer>
                 </S.SliderMenu>
             </S.MobileMenu>
 
