@@ -8,7 +8,7 @@ export default {
     component: Avatar,
     argTypes: {
         size: {
-            control: 'select',
+            control: { type: 'select' },
             options: ['small', 'medium', 'large'],
         },
     },
@@ -17,7 +17,7 @@ export default {
         imgURL: '/images/avatar.jpeg',
     },
     parameters: {
-        layout: 'fullscreen',
+        layout: 'centered',
     },
 } as Meta
 

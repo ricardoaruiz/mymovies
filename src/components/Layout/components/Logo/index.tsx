@@ -28,9 +28,15 @@ const Logo: React.VFC<LogoProps> = ({
      */
     const logo = React.useMemo(() => {
         const logo = imgURL ? (
-            <S.LogoImage imgURL={imgURL} size={size} />
+            <S.LogoImage
+                imgURL={imgURL}
+                size={size}
+                role="img"
+                aria-label="logo image"
+                tabIndex={-1}
+            />
         ) : (
-            <S.LogoText size={size}>
+            <S.LogoText size={size} role="img" aria-label="logo text">
                 <strong tabIndex={-1}>{texts.first}</strong>
                 <small tabIndex={-1}>{texts.second}</small>
             </S.LogoText>

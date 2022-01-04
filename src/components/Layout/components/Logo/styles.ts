@@ -77,11 +77,6 @@ const logoTextModifiers = {
 export const LogoText = styled.div<Partial<LogoProps>>`
     ${({ theme, size = 'medium' }) => css`
         color: ${theme.colors.primary};
-        font-size: 3rem;
         ${logoTextModifiers[size]};
-
-        & small {
-            font-size: 1.5rem;
-        }
     `};
 `

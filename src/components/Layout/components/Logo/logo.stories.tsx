@@ -20,6 +20,9 @@ export default {
         size: 'medium',
         imgURL: '/images/avatar.jpeg',
     },
+    parameters: {
+        layout: 'centered',
+    },
 } as Meta
 
 export const Default: Story<LogoProps> = (props) => <Logo {...props} />
