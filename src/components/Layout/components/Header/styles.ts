@@ -21,19 +21,6 @@ export const HeaderContent = styled.div`
     `};
 `
 
-export const Logo = styled.div`
-    ${({ theme }) => css`
-        margin-right: 1rem;
-        color: ${theme.colors.primary};
-        font-size: 3rem;
-        cursor: pointer;
-
-        & small {
-            font-size: 1.5rem;
-        }
-    `};
-`
-
 export const AvatarContainer = styled.div`
     display: none;
 

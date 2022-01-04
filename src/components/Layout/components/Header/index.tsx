@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import React from 'react'
 
 import { Avatar } from '../Avatar'
+import Logo from '../Logo'
 import Menu from '../Menu'
 import { ItemMenu } from '../Menu/types'
 
@@ -68,14 +68,8 @@ const Header = () => {
     return (
         <S.Header>
             <S.HeaderContent>
-                <Link href="/" passHref>
-                    <S.Logo>
-                        My<small>Movies</small>
-                    </S.Logo>
-                </Link>
-
+                <Logo href="/" />
                 <Menu items={menuItems} />
-
                 <S.AvatarContainer>
                     <Avatar
                         imgURL="/images/avatar.jpeg"
