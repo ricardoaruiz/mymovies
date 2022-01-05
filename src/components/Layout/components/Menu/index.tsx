@@ -1,17 +1,71 @@
 import React from 'react'
 
-import Item from './components/Item'
-import { MenuProps } from './types'
-
-import * as S from './styles'
 import { Avatar } from '../Avatar'
 import { CloseIcon, MenuIcon } from '../../../Icons'
+import Item from './components/Item'
+import { MenuProps } from './types'
+import { useMedia } from 'hooks/useMedia'
+
+import * as S from './styles'
 
 const Menu: React.VFC<MenuProps> = ({ items }) => {
+    const { isMobile } = useMedia()
+    const sliderRef = React.useRef() as React.MutableRefObject<HTMLDivElement>
+
     const [openedMenu, setOpenedMenu] = React.useState<
         string | null | undefined
     >(null)
     const [openedSliderMenu, setOpenedSliderMenu] = React.useState(false)
+
+    /**
+     *
+     */
+    const handleOpenMenuClick = React.useCallback(() => {
+        setOpenedSliderMenu(true)
+        sliderRef.current.focus()
+    }, [])
+
+    /**
+     *
+     */
+    const handleOpenMenuKeypress = React.useCallback(
+        (event: React.KeyboardEvent<SVGElement>) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                setOpenedSliderMenu(true)
+                sliderRef.current.focus()
+            }
+        },
+        []
+    )
+
+    /**
+     *
+     */
+    const handleCloseMenuClick = React.useCallback(() => {
+        setOpenedSliderMenu(false)
+    }, [])
+
+    /**
+     *
+     */
+    const handleCloseMenuKeypress = React.useCallback(
+        (event: React.KeyboardEvent<SVGElement>) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                setOpenedSliderMenu(false)
+            }
+        },
+        []
+    )
+
+    /**
+     *
+     */
+    const handleCloseMenuOnEsc = React.useCallback(
+        (event: React.KeyboardEvent<HTMLDivElement>) => {
+            event.key === 'Escape' && setOpenedSliderMenu(false)
+        },
+        []
+    )
 
     /**
      *
@@ -54,39 +108,56 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
     return (
         <S.Menu tabIndex={-1} role="menu" aria-label="menu da aplicação">
             {/*  */}
-            <S.MobileMenu>
-                {!openedSliderMenu && (
-                    <MenuIcon
-                        width="4rem"
-                        height="4rem"
-                        onClick={() => setOpenedSliderMenu(true)}
-                        aria-hidden={openedSliderMenu}
-                    />
-                )}
-                {openedSliderMenu && (
-                    <CloseIcon
-                        width="4rem"
-                        height="4rem"
-                        onClick={() => setOpenedSliderMenu(false)}
+            {isMobile && (
+                <S.MobileMenu aria-label="menu mobile">
+                    {!openedSliderMenu && (
+                        <MenuIcon
+                            width="4rem"
+                            height="4rem"
+                            onClick={handleOpenMenuClick}
+                            onKeyDown={handleOpenMenuKeypress}
+                            aria-label="open menu button"
+                            tabIndex={1}
+                        />
+                    )}
+                    {openedSliderMenu && (
+                        <CloseIcon
+                            width="4rem"
+                            height="4rem"
+                            onClick={handleCloseMenuClick}
+                            onKeyDown={handleCloseMenuKeypress}
+                            aria-label="close menu button"
+                            tabIndex={1}
+                        />
+                    )}
+
+                    <S.SliderMenu
+                        isOpen={openedSliderMenu}
                         aria-hidden={!openedSliderMenu}
-                    />
-                )}
+                        aria-label="slider menu, press esc to close"
+                        tabIndex={1}
+                        onKeyDown={handleCloseMenuOnEsc}
+                        ref={sliderRef}
+                    >
+                        <S.AvatarContainer>
+                            <Avatar imgURL="/images/avatar.jpeg" size="large" />
+                        </S.AvatarContainer>
 
-                <S.SliderMenu isOpen={openedSliderMenu}>
-                    <S.AvatarContainer>
-                        <Avatar imgURL="/images/avatar.jpeg" size="large" />
-                    </S.AvatarContainer>
+                        <S.Divider />
 
-                    <S.Divider />
-
-                    <S.MenuItemsMobileContainer>
-                        {menuItems('mobile')}
-                    </S.MenuItemsMobileContainer>
-                </S.SliderMenu>
-            </S.MobileMenu>
+                        <S.MenuItemsMobileContainer>
+                            {menuItems('mobile')}
+                        </S.MenuItemsMobileContainer>
+                    </S.SliderMenu>
+                </S.MobileMenu>
+            )}
 
             {/*  */}
-            <S.DeskMenu>{menuItems('desk')}</S.DeskMenu>
+            {!isMobile && (
+                <S.DeskMenu aria-label="menu desktop">
+                    {menuItems('desk')}
+                </S.DeskMenu>
+            )}
         </S.Menu>
     )
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 import type { NextPage } from 'next'
 
-import * as S from './index.styles'
 import { Layout } from 'components'
+
+import * as S from './index.styles'
 
 const Home: NextPage = () => {
     return (

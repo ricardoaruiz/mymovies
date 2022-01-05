@@ -1,8 +1,11 @@
-export type IconProps = IconEvents & {
-    width?: string
-    height?: string
-    stroke?: string
-}
+import React from 'react'
+
+export type IconProps = IconEvents &
+    React.SVGAttributes<SVGElement> & {
+        width?: string
+        height?: string
+        stroke?: string
+    }
 
 type IconEvents = {
     onClick?: () => void

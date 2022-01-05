@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 import { darken } from 'polished'
 
 export const Menu = styled.nav`
@@ -15,10 +14,6 @@ export const MobileMenu = styled.div`
     display: flex;
     width: 100%;
     justify-content: flex-end;
-
-    ${media.greaterThan('medium')`
-        display: none;
-    `}
 `
 
 type SlideMenuProps = {
@@ -71,13 +66,9 @@ export const SliderMenuContent = styled.div`
 `
 
 export const DeskMenu = styled.div`
-    display: none;
-
-    ${media.greaterThan('medium')`
-        display: flex;
-        align-self: stretch;
-        align-items: center;
-    `}
+    display: flex;
+    align-self: stretch;
+    align-items: center;
 `
 
 export const AvatarContainer = styled.div`

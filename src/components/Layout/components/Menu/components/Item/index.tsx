@@ -55,12 +55,15 @@ const Item: React.FC<ItemProps> = ({
                     show={isOpen}
                     isMobile={isMobile}
                     tabIndex={-1}
+                    role="group"
+                    aria-label={`${label} menu items`}
+                    aria-hidden={!isOpen}
                 >
                     {children}
                 </S.DropDownItems>
             </S.DropDownItemsContainer>
         )
-    }, [children, isMobile, isOpen, renderItem])
+    }, [children, isMobile, isOpen, label, renderItem])
 
     /**
      *

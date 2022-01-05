@@ -58,7 +58,11 @@ const menuItems: ItemMenu[] = [
 ]
 
 describe('<Menu />', () => {
-    it('should be render correctly', () => {
+    beforeEach(() => {
+        global.innerWidth = 769
+    })
+
+    it('should be render correctly desktop', () => {
         renderWithTheme(<Menu items={menuItems} />)
 
         expect(screen.getByLabelText(/menu da aplicação/i)).toBeInTheDocument()
@@ -79,31 +83,60 @@ describe('<Menu />', () => {
         ).toBeInTheDocument()
     })
 
-    xit('should be show movies options menu when item menu is hovered', async () => {
+    it('should be render correctly mobile', async () => {
+        global.innerWidth = 300
+
         renderWithTheme(<Menu items={menuItems} />)
-        const moviewItemMenu = screen.getByRole('menuitem', {
-            name: /filmes, ver mais/i,
+
+        expect(screen.getByLabelText(/menu da aplicação/i)).toBeInTheDocument()
+
+        const sliderMenu = screen.getByLabelText(
+            'slider menu, press esc to close'
+        )
+        expect(sliderMenu).toHaveAttribute('aria-hidden', 'true')
+
+        const openMenuButton = screen.getByLabelText('open menu button')
+        act(() => {
+            fireEvent.click(openMenuButton)
+        })
+
+        const closeMenuButton = await waitFor(() => {
+            expect(sliderMenu).toHaveAttribute('aria-hidden', 'false')
+            expect(
+                screen.getByRole('menuitem', {
+                    name: /filmes, ver mais/i,
+                })
+            ).toBeInTheDocument()
+            expect(
+                screen.getByRole('menuitem', {
+                    name: /séries, ver mais/i,
+                })
+            ).toBeInTheDocument()
+            expect(
+                screen.getByRole('menuitem', {
+                    name: /pessoas, ver mais/i,
+                })
+            ).toBeInTheDocument()
+
+            return screen.getByLabelText('close menu button')
         })
 
         act(() => {
-            fireEvent.mouseOver(moviewItemMenu)
+            fireEvent.click(closeMenuButton)
         })
 
         await waitFor(() => {
-            expect(screen.getAllByLabelText(/filmes populares/i)).toHaveLength(
-                2
-            )
-            expect(screen.getAllByLabelText(/filmes em cartaz/i)).toHaveLength(
-                2
-            )
+            expect(sliderMenu).toHaveAttribute('aria-hidden', 'true')
         })
     })
 
-    xit('should be show series options menu when item series is hovered', async () => {
+    it('should be show movies options menu when item menu is hovered', async () => {
         renderWithTheme(<Menu items={menuItems} />)
+
         const moviewItemMenu = screen.getByRole('menuitem', {
-            name: /séries, ver mais/i,
+            name: /filmes, ver mais/i,
         })
+        expect(moviewItemMenu).toBeInTheDocument()
 
         act(() => {
             fireEvent.mouseOver(moviewItemMenu)
@@ -111,29 +144,65 @@ describe('<Menu />', () => {
 
         await waitFor(() => {
             expect(
-                screen.getByRole('menuitem', {
-                    name: /populares/i,
-                })
+                screen.getByRole('group', { name: /filmes menu items/i })
+            ).toHaveAttribute('aria-hidden', 'false')
+            expect(
+                screen.getByRole('menuitem', { name: /filmes populares/i })
+            ).toBeInTheDocument()
+            expect(
+                screen.getByRole('menuitem', { name: /filmes em cartaz/i })
             ).toBeInTheDocument()
             expect(
                 screen.getByRole('menuitem', {
-                    name: /em exibição/i,
+                    name: /filmes próximas estreias/i,
                 })
             ).toBeInTheDocument()
-            expect(
-                screen.getByRole('menuitem', {
-                    name: /na tv/i,
-                })
-            ).toBeInTheDocument()
+
             expect(
                 screen.queryByRole('menuitem', {
-                    name: /próximas estreias/i,
+                    name: /séries menu items/i,
                 })
             ).not.toBeInTheDocument()
         })
     })
 
-    xit('should be show people options menu when item people is hovered', async () => {
+    it('should be show series options menu when item series is hovered', async () => {
+        renderWithTheme(<Menu items={menuItems} />)
+
+        const seriesItemMenu = screen.getByRole('menuitem', {
+            name: /séries, ver mais/i,
+        })
+        expect(seriesItemMenu).toBeInTheDocument()
+
+        act(() => {
+            fireEvent.mouseOver(seriesItemMenu)
+        })
+
+        await waitFor(() => {
+            expect(
+                screen.getByRole('group', { name: /séries menu items/i })
+            ).toHaveAttribute('aria-hidden', 'false')
+            expect(
+                screen.getByRole('menuitem', { name: /séries populares/i })
+            ).toBeInTheDocument()
+            expect(
+                screen.getByRole('menuitem', { name: /séries em exibição/i })
+            ).toBeInTheDocument()
+            expect(
+                screen.getByRole('menuitem', {
+                    name: /séries na tv/i,
+                })
+            ).toBeInTheDocument()
+
+            expect(
+                screen.queryByRole('menuitem', {
+                    name: /filmes próximas estreias/i,
+                })
+            ).not.toBeInTheDocument()
+        })
+    })
+
+    it('should be show people options menu when item people is hovered', async () => {
         renderWithTheme(<Menu items={menuItems} />)
         const moviewItemMenu = screen.getByRole('menuitem', {
             name: /pessoas, ver mais/i,
@@ -145,13 +214,15 @@ describe('<Menu />', () => {
 
         await waitFor(() => {
             expect(
-                screen.getByRole('menuitem', {
-                    name: /populares/i,
-                })
+                screen.getByRole('group', { name: /pessoas menu items/i })
+            ).toHaveAttribute('aria-hidden', 'false')
+            expect(
+                screen.getByRole('menuitem', { name: /pessoas populares/i })
             ).toBeInTheDocument()
+
             expect(
                 screen.queryByRole('menuitem', {
-                    name: /próximas estreias/i,
+                    name: /filmes próximas estreias/i,
                 })
             ).not.toBeInTheDocument()
         })
