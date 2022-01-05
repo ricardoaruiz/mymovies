@@ -1,11 +1,13 @@
 import React from 'react'
 import { NextPage } from 'next'
-import { Layout } from 'components'
+import { Container, Layout } from 'components'
 
 const PopularMovies: NextPage = () => {
     return (
         <Layout>
-            <h1>Popular movies</h1>
+            <Container>
+                <h1>Popular movies</h1>
+            </Container>
         </Layout>
     )
 }

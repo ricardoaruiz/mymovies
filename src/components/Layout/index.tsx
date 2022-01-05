@@ -1,5 +1,5 @@
 import React from 'react'
-import { Content, Footer, Header } from './components'
+import { Footer, Header } from './components'
 
 const content = [
     {
@@ -37,7 +37,7 @@ const Layout: React.FC = ({ children }) => {
         <>
             <Header />
 
-            <Content>{children}</Content>
+            {children}
 
             <Footer logo={{ href: '/' }} content={content} />
         </>

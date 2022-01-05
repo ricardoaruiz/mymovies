@@ -1,14 +1,20 @@
 import React from 'react'
 import type { NextPage } from 'next'
 
-import { Layout } from 'components'
+import { Container, Hero, Layout } from 'components'
 
-import * as S from './index.styles'
+// import * as S from './index.styles'
 
 const Home: NextPage = () => {
     return (
         <Layout>
-            <S.Title>Home</S.Title>
+            <Container isFullWidthMobile>
+                <Hero imgURL="/images/hero1-img.jpg" />
+            </Container>
+
+            <Container>
+                <h3>Conteúdo home</h3>
+            </Container>
         </Layout>
     )
 }

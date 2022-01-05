@@ -96,7 +96,7 @@ export const DropDownItems = styled.div<DropDownItemsProps>`
         display: flex;
         flex-direction: column;
         background-color: ${theme.colors.secondary};
-        z-index: ${theme.layers.menu};
+        z-index: ${theme.layers.alwaysOnTop};
 
         ${isMobile
             ? dropDownItemsModifiers.mobile()
