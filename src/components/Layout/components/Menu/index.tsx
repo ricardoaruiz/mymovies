@@ -4,7 +4,7 @@ import { Avatar } from '../Avatar'
 import { CloseIcon, MenuIcon } from '../../../Icons'
 import Item from './components/Item'
 import { MenuProps } from './types'
-import { useMedia } from 'hooks/useMedia'
+import { useMedia } from '../../../../hooks/useMedia'
 
 import * as S from './styles'
 

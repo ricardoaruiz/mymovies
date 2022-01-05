@@ -2,41 +2,11 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import Logo from '../Logo'
+import { FooterProps } from './types'
 
 import * as S from './styles'
 
-const content = [
-    {
-        title: 'O Básico',
-        items: [
-            { text: 'Sobre o MyMovies', href: '/' },
-            { text: 'Contate-nos', href: '/' },
-        ],
-    },
-    {
-        title: 'Envolva-se',
-        items: [
-            { text: 'Adicionar um novo filme', href: '/' },
-            { text: 'Adicionar uma nova série', href: '/' },
-        ],
-    },
-    {
-        title: 'Comunidade',
-        items: [
-            { text: 'Diretrizes', href: '/' },
-            { text: 'Discussões', href: '/' },
-        ],
-    },
-    {
-        title: 'Legalidade',
-        items: [
-            { text: 'Termo de uso', href: '/' },
-            { text: 'Política de privacidade', href: '/' },
-        ],
-    },
-]
-
-const Footer = () => {
+const Footer: React.VFC<FooterProps> = ({ logo, content }) => {
     const router = useRouter()
 
     /**
@@ -65,19 +35,28 @@ const Footer = () => {
         <S.Footer>
             <S.FooterContent>
                 <S.LogoContainer>
-                    <Logo href="/" size="xlarge" />
+                    <Logo
+                        href={logo?.href}
+                        imgURL={logo?.imgURL}
+                        texts={logo?.texts}
+                        size={logo?.size || 'xlarge'}
+                    />
                 </S.LogoContainer>
 
                 <S.ItemContainer>
-                    {content.map((item) => (
-                        <S.Item key={item.title}>
+                    {content?.map((item) => (
+                        <S.Item
+                            key={item.title}
+                            aria-label={`${item.title} list item`}
+                            role="listitem"
+                        >
                             <h3>{item.title}</h3>
                             <ul tabIndex={-1}>
                                 {item.items.map((subItem) => (
                                     <li key={subItem.text} tabIndex={-1}>
                                         <a
                                             tabIndex={1}
-                                            role="link"
+                                            role="item"
                                             aria-label={`${item.title}, ${subItem.text}`}
                                             onClick={() =>
                                                 navigate(subItem.href)
