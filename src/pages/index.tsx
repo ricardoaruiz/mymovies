@@ -9,7 +9,12 @@ const Home: NextPage = () => {
     return (
         <Layout>
             <Container isFullWidthMobile>
-                <Hero imgURL="/images/hero1-img.jpg" />
+                <Hero
+                    imgURL="/images/hero1-img.jpg"
+                    title="Bem-vindo(a)."
+                    subtitle="Milhões de filmes, séries e pessoas para descobrir. Explore já."
+                    onSearch={(searchTerm) => console.log(searchTerm)}
+                />
             </Container>
 
             <Container>

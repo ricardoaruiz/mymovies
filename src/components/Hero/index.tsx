@@ -1,26 +1,33 @@
 import React from 'react'
 
 import { HeroProps } from './types'
-import { InputSearch } from 'components'
+import InputSearch from '../InputSerach'
 
 import * as S from './styles'
 
-const Hero: React.VFC<HeroProps> = ({ imgURL }) => {
-    return (
-        <S.Hero
-            imgURL={imgURL}
-            tabIndex={1}
-            aria-label="Bem-vindo(a). Milhões de filmes, séries e pessoas para descobrir. Explore já."
-        >
-            <S.Title>Bem-vindo(a).</S.Title>
-            <S.SubTitle>
-                Milhões de filmes, séries e pessoas para descobrir. Explore já.
-            </S.SubTitle>
+const Hero: React.VFC<HeroProps> = ({
+    title,
+    subtitle,
+    imgURL,
+    onSearch,
+    searchFieldPlaceholder = 'Digite sua busca aqui',
+}) => {
+    const ariaLabel = React.useMemo(() => {
+        const text = `${title || ''} ${subtitle || ''}`
+        return text.trim() || 'hero'
+    }, [subtitle, title])
 
-            <InputSearch
-                placeholder="Buscar por um filme, série ou pessoa..."
-                onSearch={(searchTerm) => console.log(`onSearch ${searchTerm}`)}
-            />
+    return (
+        <S.Hero imgURL={imgURL} tabIndex={1} aria-label={ariaLabel}>
+            <S.Title>{title}</S.Title>
+            <S.SubTitle>{subtitle}</S.SubTitle>
+
+            {onSearch && (
+                <InputSearch
+                    placeholder={searchFieldPlaceholder}
+                    onSearch={onSearch}
+                />
+            )}
         </S.Hero>
     )
 }
