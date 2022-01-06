@@ -1,12 +1,12 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import Logo from '../Logo'
+import { Logo } from '../Logo'
 import { FooterProps } from './types'
 
 import * as S from './styles'
 
-const Footer: React.VFC<FooterProps> = ({ logo, content }) => {
+export const Footer: React.VFC<FooterProps> = ({ logo, content }) => {
     const router = useRouter()
 
     /**
@@ -80,5 +80,3 @@ const Footer: React.VFC<FooterProps> = ({ logo, content }) => {
         </S.Footer>
     )
 }
-
-export default Footer

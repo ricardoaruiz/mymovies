@@ -1,13 +1,13 @@
 import React from 'react'
 
 import { Avatar } from '../Avatar'
-import Logo from '../Logo'
-import Menu from '../Menu'
+import { Logo } from '../Logo'
+import { Menu } from '../Menu'
 import { ItemMenu } from '../Menu/types'
 
 import * as S from './styles'
 
-const Header = () => {
+export const Header = () => {
     const [menuItems] = React.useState<ItemMenu[]>([
         {
             main: { id: 'movies', label: 'Filmes' },
@@ -80,5 +80,3 @@ const Header = () => {
         </S.Header>
     )
 }
-
-export default Header

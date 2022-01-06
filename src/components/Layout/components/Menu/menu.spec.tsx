@@ -2,7 +2,7 @@ import { act, fireEvent, screen, waitFor } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import { ItemMenu } from './types'
-import Menu from '.'
+import { Menu } from '.'
 
 const menuItems: ItemMenu[] = [
     {

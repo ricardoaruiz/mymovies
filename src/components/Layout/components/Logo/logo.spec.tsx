@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react'
 import { renderWithTheme } from '../../../../utils/tests/helpers'
-import Logo from '.'
+import { Logo } from '.'
 
 const mockedPush = jest.fn()
 jest.mock('next/router', () => ({

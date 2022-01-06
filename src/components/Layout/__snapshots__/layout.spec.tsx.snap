@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout /> should be render correctly 1`] = `
+<div>
+  <div
+    data-testid="mocked-header"
+  >
+    Header
+  </div>
+  <div
+    data-testid="main-content"
+  >
+    Conteúdo
+  </div>
+  <div
+    data-testid="mocked-header"
+  >
+    Header
+  </div>
+</div>
+`

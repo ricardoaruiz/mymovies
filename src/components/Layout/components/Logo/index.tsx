@@ -5,7 +5,7 @@ import { LogoProps } from './types'
 
 import * as S from './styles'
 
-const Logo: React.VFC<LogoProps> = ({
+export const Logo: React.VFC<LogoProps> = ({
     imgURL,
     href,
     size = 'medium',
@@ -72,5 +72,3 @@ const Logo: React.VFC<LogoProps> = ({
         </S.Logo>
     )
 }
-
-export default Logo

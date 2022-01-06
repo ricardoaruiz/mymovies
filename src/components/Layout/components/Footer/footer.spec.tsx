@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
-import Footer from '.'
+import { Footer } from '.'
 
 const content = [
     {

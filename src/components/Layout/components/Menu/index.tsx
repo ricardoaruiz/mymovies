@@ -8,7 +8,7 @@ import { useMedia } from '../../../../hooks/useMedia'
 
 import * as S from './styles'
 
-const Menu: React.VFC<MenuProps> = ({ items }) => {
+export const Menu: React.VFC<MenuProps> = ({ items }) => {
     const { isMobile } = useMedia()
     const sliderRef = React.useRef() as React.MutableRefObject<HTMLDivElement>
 
@@ -161,5 +161,3 @@ const Menu: React.VFC<MenuProps> = ({ items }) => {
         </S.Menu>
     )
 }
-
-export default Menu
