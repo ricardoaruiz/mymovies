@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Avatar } from '../Avatar'
-import { CloseIcon, MenuIcon } from '../../../Icons'
+import { CloseIcon, MenuIcon } from 'components'
 import Item from './components/Item'
 import { MenuProps } from './types'
 import { useMedia } from '../../../../hooks/useMedia'

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { HeroProps } from './types'
-import InputSearch from '../InputSerach'
+import { InputSearch } from 'components'
 
 import * as S from './styles'
 
