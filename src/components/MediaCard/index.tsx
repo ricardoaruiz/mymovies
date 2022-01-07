@@ -36,6 +36,7 @@ export const MediaCard: React.VFC<MediaCardProps> = ({
                 aria-label={title}
                 onClick={onClick}
                 onKeyDown={handleKeydown}
+                tabIndex={1}
             >
                 <S.Title>{title}</S.Title>
                 <S.Date>{date}</S.Date>

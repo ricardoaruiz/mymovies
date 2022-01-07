@@ -15,7 +15,6 @@ export default {
         imgURL: '/images/cards/spiderman.jpg',
         title: 'Home aranha de volta ao lar',
         date: '17 de jul de 2017',
-        onClick: () => alert('Card clicked'),
     },
 } as Meta<MediaCardProps>
 
