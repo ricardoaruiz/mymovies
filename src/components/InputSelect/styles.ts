@@ -6,8 +6,9 @@ export const Wrapper = styled.div`
 
 export const Select = styled.div`
     ${({ theme }) => css`
+        color: ${theme.colors.black};
         border: 1px solid ${theme.colors.gray};
-        border-radius: 0.5rem;
+        border-radius: 2.4rem;
         outline: none;
 
         & svg {
@@ -17,6 +18,7 @@ export const Select = styled.div`
 
         &:focus {
             border: 1px solid ${theme.colors.primary};
+            color: ${theme.colors.primary};
 
             & svg {
                 fill: transparent;
@@ -25,6 +27,7 @@ export const Select = styled.div`
         }
         &:hover {
             border: 1px solid ${theme.colors.primary};
+            color: ${theme.colors.primary};
 
             & svg {
                 fill: transparent;
@@ -53,8 +56,9 @@ export const Items = styled.div<ItemsProps>`
     ${({ theme, isOpen = false }) => css`
         position: absolute;
         margin-top: 0.5rem;
+        padding: 1rem;
         border: 1px solid ${theme.colors.lightGray};
-        border-radius: 0.5rem;
+        border-radius: 2.4rem;
         width: 100%;
         transition: all 0.3s;
         z-index: ${theme.layers.menu};
@@ -85,14 +89,16 @@ export const ItemsOverlay = styled.div<ItemsOverlayProps>`
 
 type ItemProps = {
     useHover?: boolean
+    padding?: string
 }
 
 export const Item = styled.div<ItemProps>`
-    ${({ theme, useHover = true }) => css`
+    ${({ theme, useHover = true, padding = '1rem 0.8rem' }) => css`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 0.5rem;
+        padding: ${padding};
+        border-radius: 2rem;
         cursor: pointer;
 
         ${useHover &&

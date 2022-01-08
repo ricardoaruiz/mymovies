@@ -44,9 +44,7 @@ export const InputSelect: React.VFC<InputSelectProps> = ({
      */
     const handleItemClick = React.useCallback(
         (value: SelectItem<number | string | null>) => {
-            console.log('item clicked or pressed', value)
             onChange(value)
-            selectRef.current.focus()
             setIsOpen(false)
         },
         [onChange]
@@ -62,6 +60,7 @@ export const InputSelect: React.VFC<InputSelectProps> = ({
         ) => {
             if (event.key === 'Enter' || event.key === ' ') {
                 handleItemClick(value)
+                selectRef.current.focus()
                 return
             }
             if (event.key === 'Escape') {
@@ -113,7 +112,12 @@ export const InputSelect: React.VFC<InputSelectProps> = ({
         }
 
         return (
-            <S.Items isOpen={isOpen} tabIndex={-1}>
+            <S.Items
+                isOpen={isOpen}
+                tabIndex={-1}
+                role="group"
+                aria-hidden={!isOpen}
+            >
                 {newItems}
             </S.Items>
         )
@@ -133,18 +137,12 @@ export const InputSelect: React.VFC<InputSelectProps> = ({
                 onKeyDown={handleSelectKeyDown}
                 tabIndex={1}
                 role="menu"
-                aria-label="select xxx"
+                aria-label={!selectedItem ? placeholder : selectedItem.label}
                 ref={selectRef}
             >
                 {/* Selected Item */}
                 <S.Item useHover={false}>
-                    {!selectedItem ? (
-                        <S.Item key={-1}>{placeholder}</S.Item>
-                    ) : (
-                        <S.Item key={selectedItem.value}>
-                            {selectedItem.label}
-                        </S.Item>
-                    )}
+                    {!selectedItem ? placeholder : selectedItem.label}
                     {isOpen ? <UpIcon /> : <DownIcon />}
                 </S.Item>
             </S.Select>
@@ -153,10 +151,12 @@ export const InputSelect: React.VFC<InputSelectProps> = ({
             {renderSelectItems()}
 
             <S.ItemsOverlay
+                role="region"
+                aria-label="select overlay"
+                tabIndex={-1}
                 isOpen={isOpen}
                 onClick={() => {
                     setIsOpen(false)
-                    console.log('clicked')
                 }}
             />
         </S.Wrapper>
