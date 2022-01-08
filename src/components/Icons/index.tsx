@@ -37,3 +37,37 @@ export const CloseIcon: React.VFC<IconProps> = (props) => {
         </S.SVG>
     )
 }
+
+export const DownIcon: React.VFC<IconProps> = (props) => {
+    return (
+        <S.SVG
+            xmlns="http://www.w3.org/2000/S.SVG"
+            viewBox="0 0 24 24"
+            {...props}
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+            />
+        </S.SVG>
+    )
+}
+
+export const UpIcon: React.VFC<IconProps> = (props) => {
+    return (
+        <S.SVG
+            xmlns="http://www.w3.org/2000/S.SVG"
+            viewBox="0 0 24 24"
+            {...props}
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 15l7-7 7 7"
+            />
+        </S.SVG>
+    )
+}

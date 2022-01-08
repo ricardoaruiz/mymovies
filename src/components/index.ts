@@ -4,15 +4,17 @@ import Hero from './Hero'
 import InputSearch from './InputSearch'
 import { MediaCard } from './MediaCard'
 import { MediaCardCarousel } from './MediaCardCarousel'
-import { MenuIcon, CloseIcon } from './Icons'
+import { MenuIcon, CloseIcon, UpIcon, DownIcon } from './Icons'
 
 export {
     Layout,
     Container,
     Hero,
     InputSearch,
-    MenuIcon,
-    CloseIcon,
     MediaCard,
     MediaCardCarousel,
+    MenuIcon,
+    CloseIcon,
+    UpIcon,
+    DownIcon,
 }

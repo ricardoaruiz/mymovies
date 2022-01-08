@@ -5,6 +5,7 @@ export type IconProps = IconEvents &
         width?: string
         height?: string
         stroke?: string
+        useHover?: boolean
     }
 
 type IconEvents = {
