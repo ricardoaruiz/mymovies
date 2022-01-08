@@ -8,9 +8,13 @@ exports[`<Layout /> should be render correctly 1`] = `
     Header
   </div>
   <div
-    data-testid="main-content"
+    class="styles__MainContent-sc-1fdzcc4-0 eQpLcO"
   >
-    Conteúdo
+    <div
+      data-testid="main-content"
+    >
+      Conteúdo
+    </div>
   </div>
   <div
     data-testid="mocked-header"

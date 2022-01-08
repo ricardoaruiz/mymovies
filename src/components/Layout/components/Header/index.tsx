@@ -4,10 +4,17 @@ import { Avatar } from '../Avatar'
 import { Logo } from '../Logo'
 import { Menu } from '../Menu'
 import { ItemMenu } from '../Menu/types'
+import { useScroll } from 'hooks/useScroll'
 
 import * as S from './styles'
 
 export const Header = () => {
+    const { isScrollDown, verticalPosition } = useScroll()
+
+    const hideHeader = React.useMemo(() => {
+        return isScrollDown && verticalPosition >= 70
+    }, [isScrollDown, verticalPosition])
+
     const [menuItems] = React.useState<ItemMenu[]>([
         {
             main: { id: 'movies', label: 'Filmes' },
@@ -66,7 +73,7 @@ export const Header = () => {
     }
 
     return (
-        <S.Header>
+        <S.Header hide={hideHeader}>
             <S.HeaderContent>
                 <Logo href="/" />
                 <Menu items={menuItems} />

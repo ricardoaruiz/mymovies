@@ -1,6 +1,8 @@
 import React from 'react'
 import { Footer, Header } from './components'
 
+import * as S from './styles'
+
 const content = [
     {
         title: 'O Básico',
@@ -37,7 +39,7 @@ const Layout: React.FC = ({ children }) => {
         <>
             <Header />
 
-            {children}
+            <S.MainContent>{children}</S.MainContent>
 
             <Footer logo={{ href: '/' }} content={content} />
         </>
