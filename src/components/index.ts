@@ -1,7 +1,7 @@
 import Layout from './Layout'
 import Container from './Container'
 import Hero from './Hero'
-import InputSearch from './InputSerach'
+import InputSearch from './InputSearch'
 import { MediaCard } from './MediaCard'
 import { MediaCardCarousel } from './MediaCardCarousel'
 import { MenuIcon, CloseIcon } from './Icons'
