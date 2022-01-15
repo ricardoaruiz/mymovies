@@ -16,7 +16,7 @@ import {
 export const useNowPlayingMovies = ({
     page,
     key = 'playingMovies',
-    options = QUERY_OPTIONS_DEFAULT,
+    options,
 }: UseNowPlayingMoviesParams) => {
     const { removeQuery } = useReactQueryUtils()
 

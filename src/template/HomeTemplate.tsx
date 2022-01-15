@@ -5,33 +5,31 @@ import { BFFMovie } from 'pages/api/movies/types'
 import { Card } from 'components/MediaCardCarousel/types'
 import { Container, Hero, Layout, MediaCardCarousel } from 'components'
 import { NowPlayingMoviesResponseData } from 'hooks/bff/movies/types'
-import { nowPlayingMoviesClient } from 'hooks/bff'
+import { useNowPlayingMovies } from 'hooks/bff'
 
 export type HomeTemplateProps = {
     playingNowMovies: NowPlayingMoviesResponseData
 }
 
 const HomeTemplate: React.VFC<HomeTemplateProps> = ({ playingNowMovies }) => {
-    const page = React.useRef<number>(2)
-    const [isLoading, setIsLoading] = React.useState(false)
-
+    const [playingNowMoviesDataPage, setplayingNowMoviesDataPage] =
+        React.useState(1)
     const [playingNowMoviesData, setPlayingNowMoviesData] =
         React.useState<NowPlayingMoviesResponseData>(playingNowMovies)
 
-    /**
-     *
-     */
-    const fetchMorePlayingMovies = React.useCallback(async () => {
-        setIsLoading(true)
-        const morePlayingMovies = await nowPlayingMoviesClient(page.current)
-        setTimeout(() => {
-            setPlayingNowMoviesData((state) => ({
-                ...state,
-                data: [...state.data, ...morePlayingMovies.data],
-            }))
-            setIsLoading(false)
-        }, 2000)
-    }, [])
+    const { isLoading: isLoadingPlayingNowMoviesData } = useNowPlayingMovies({
+        page: playingNowMoviesDataPage,
+        options: {
+            enabled: playingNowMoviesDataPage > 1,
+            cacheTime: 10000,
+            onSuccess: (result) => {
+                setPlayingNowMoviesData((state) => ({
+                    ...state,
+                    data: [...state.data, ...result.data],
+                }))
+            },
+        },
+    })
 
     /**
      *
@@ -53,12 +51,11 @@ const HomeTemplate: React.VFC<HomeTemplateProps> = ({ playingNowMovies }) => {
     const handleScrolledEndPlayinMovies = React.useCallback(() => {
         if (
             playingNowMoviesData.total_pages &&
-            page.current <= playingNowMoviesData.total_pages
+            playingNowMoviesDataPage < playingNowMoviesData.total_pages
         ) {
-            fetchMorePlayingMovies()
-            page.current += 1
+            setplayingNowMoviesDataPage((state) => state + 1)
         }
-    }, [fetchMorePlayingMovies, playingNowMoviesData.total_pages])
+    }, [playingNowMoviesDataPage, playingNowMoviesData.total_pages])
 
     /**
      *
@@ -84,7 +81,7 @@ const HomeTemplate: React.VFC<HomeTemplateProps> = ({ playingNowMovies }) => {
             <Container mt="2rem" mb="2rem">
                 <MediaCardCarousel
                     title="Filmes em cartaz"
-                    isLoading={isLoading}
+                    isLoading={isLoadingPlayingNowMoviesData}
                     cards={mapMovieCards(playingNowMoviesData.data)}
                     onCardClicked={handleClickCardPlayingMovies}
                     onScrolledEnd={handleScrolledEndPlayinMovies}
