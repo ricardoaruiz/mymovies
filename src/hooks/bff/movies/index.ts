@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { QUERY_OPTIONS_DEFAULT } from '../constants'
 import { useReactQueryUtils } from '../useReactQueryUtils'
-import { nowPlayingMoviesClient } from './fetchers'
+import { nowPlayingMoviesClient, NOW_PLAYING_MOVIES_KEY } from './fetchers'
 import {
     UseNowPlayingMoviesParams,
     NowPlayingMoviesResponseData,
@@ -24,7 +24,7 @@ export const useNowPlayingMovies = ({
      *
      */
     const nowPlaying = useQuery<NowPlayingMoviesResponseData, Error>(
-        [key, page],
+        [NOW_PLAYING_MOVIES_KEY, page],
         () => nowPlayingMoviesClient(page),
         { ...options }
     )

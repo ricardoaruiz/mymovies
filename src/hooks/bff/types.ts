@@ -14,4 +14,5 @@ export interface QueryOptions<T> {
     refetchOnMount?: boolean | 'always'
     refetchOnWindowFocus?: boolean | 'always'
     initialData?: T | (() => T) | any
+    keepPreviousData?: boolean
 }

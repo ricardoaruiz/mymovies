@@ -6,12 +6,12 @@ import { nowPlayingMovies } from 'hooks/bff'
 import { HomeTemplateProps } from 'template/HomeTemplate'
 
 export const getStaticProps: GetStaticProps<HomeTemplateProps> = async () => {
-    const playingMoviesResponse = await nowPlayingMovies()
+    const playingNowMovies = await nowPlayingMovies()
 
     return {
         revalidate: 1000 * 60 * 60 * 24, //um dia
         props: {
-            playingNowMovies: playingMoviesResponse.data,
+            playingNowMovies,
         },
     }
 }

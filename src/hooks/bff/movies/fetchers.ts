@@ -7,6 +7,8 @@ import { NowPlayingMoviesResponseData } from './types'
  */
 const MOVIES_URL = '/movies'
 
+export const NOW_PLAYING_MOVIES_KEY = 'nowPlayingMovies'
+
 /**
  * List movies in cinema client side
  * @param currentPage default 1

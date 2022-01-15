@@ -9,4 +9,5 @@ export const QUERY_OPTIONS_DEFAULT: QueryOptions<any[]> = {
     refetchOnMount: true,
     refetchOnWindowFocus: false,
     initialData: [],
+    keepPreviousData: false,
 }
