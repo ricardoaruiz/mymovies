@@ -1,26 +1,29 @@
 import React from 'react'
 
-import { Container, Hero, Layout } from 'components'
-import { MediaCardCarousel } from 'components/MediaCardCarousel'
+import { BFFMovie } from 'pages/api/movies/types'
 
-const getCards = () => {
-    return Array.from({ length: 15 }, (_, i) => {
-        return {
-            id: i,
-            imgURL:
-                i % 2 === 0
-                    ? '/images/cards/spiderman.jpg'
-                    : '/images/cards/venon.jpg',
-            title:
-                i % 2 === 0
-                    ? `Home aranha de volta ao lar${i}`
-                    : `Venon: Tempo de carnificina${i}`,
-            date: i % 2 === 0 ? '17 de jul de 2017' : '21 de ago de 2021',
-        }
-    })
+import { Card } from 'components/MediaCardCarousel/types'
+import { Container, Hero, Layout, MediaCardCarousel } from 'components'
+
+export type HomeTemplateProps = {
+    playingNowMovies: BFFMovie[]
 }
 
-const HomeTemplate = () => {
+const HomeTemplate: React.VFC<HomeTemplateProps> = ({ playingNowMovies }) => {
+    /**
+     *
+     */
+    const mapMovieCards = React.useCallback((movies: BFFMovie[]): Card[] => {
+        return movies.map(
+            ({ id, title, release_date, images: { poster_path } }) => ({
+                id,
+                imgURL: poster_path,
+                title,
+                date: release_date,
+            })
+        )
+    }, [])
+
     return (
         <Layout>
             <Container isFullWidthMobile>
@@ -35,7 +38,7 @@ const HomeTemplate = () => {
             <Container mt="2rem" mb="2rem">
                 <MediaCardCarousel
                     title="Filmes em cartaz"
-                    cards={getCards()}
+                    cards={mapMovieCards(playingNowMovies)}
                     onCardClicked={(id) => console.log(`card clicked: ${id}`)}
                 />
             </Container>

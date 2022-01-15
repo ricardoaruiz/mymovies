@@ -6,6 +6,6 @@ export type MediaCardCorouselProps = {
     onCardClicked: (id: string | number) => void
 }
 
-type Card = Omit<MediaCardProps, 'onClick'> & {
+export type Card = Omit<MediaCardProps, 'onClick'> & {
     id: string | number
 }

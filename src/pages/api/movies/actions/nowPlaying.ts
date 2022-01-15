@@ -49,8 +49,8 @@ function buildBFFResult(
             popularity: movie.popularity,
             isAdult: movie.isAdult,
             images: {
-                backdrop_path: movie.backdrop_path,
-                poster_path: movie.poster_path,
+                backdrop_path: `${process.env.TMDB_IMAGES_ORIGINAL_URL}${movie.backdrop_path}`,
+                poster_path: `${process.env.TMDB_IMAGES_ORIGINAL_URL}${movie.poster_path}`,
             },
             votes: {
                 vote_average: movie.vote_average,
