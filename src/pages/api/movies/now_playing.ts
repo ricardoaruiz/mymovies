@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { BFFResponse } from '../types/bff'
 import { BFFMovie } from './types'
 
-import { nowPlaying } from './actions'
+import { movies } from './actions'
 
 export default (
     req: NextApiRequest,
@@ -11,7 +11,7 @@ export default (
 ) => {
     switch (req.method) {
         case 'GET':
-            return nowPlaying(req, res)
+            return movies('/now_playing', req, res)
         default:
             return res.status(405).send(null)
     }

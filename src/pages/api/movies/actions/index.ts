@@ -1,4 +1,3 @@
-import discover from './discover'
-import nowPlaying from './nowPlaying'
+import movies from './movies'
 
-export { discover, nowPlaying }
+export { movies }

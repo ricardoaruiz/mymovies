@@ -11,8 +11,8 @@ export default (
 ) => {
     switch (req.method) {
         case 'GET':
-            return movies('/discover', req, res)
+            return movies('/upcoming', req, res)
         default:
-            return res.status(405).send(null)
+            return res.status(403).send(null)
     }
 }
